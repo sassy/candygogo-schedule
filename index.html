@@ -16,7 +16,17 @@
   }).then(json => {
 
     let str = '';
-    json.items.forEach((item) => {
+    json.items.sort((a, b) => {
+      const dateA = new Date(a.start.dateTime);
+      const dateB = new Date(b.start.dateTime);
+      if (dateA.getTime() < dateB.getTime()) {
+        return -1;
+      } else if (dateA.getTime() > dateB.getTime()) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }).forEach((item) => {
       const date = new Date(item.start.dateTime);
       ret += '<li>';
       ret += date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + item.summary;
