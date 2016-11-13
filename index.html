@@ -1,0 +1,30 @@
+<html>
+<head>
+</head>
+<body>
+  <div id="content"></div>
+  <script>
+  let today = new Date();
+  let url = 'https://www.googleapis.com/calendar/v3/calendars/4vfiijma3k6rjhm26j63tbvmgs@group.calendar.google.com/events?';
+  url += 'key=AIzaSyBSv_tRfcR4vkmdXN8n2DPeIxIIzcIwnhU';
+  url += '&timeMin=';
+  url += today.toISOString();
+  const content = document.getElementById('content');
+  let ret = '<ul>'
+  fetch(url).then(res => {
+      return res.json()
+  }).then(json => {
+
+    let str = '';
+    json.items.forEach((item) => {
+      const date = new Date(item.start.dateTime);
+      ret += '<li>';
+      ret += date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + item.summary;
+      ret += '</li>';
+    });
+    ret += '</ul>';
+    content.innerHTML = ret;
+  });
+  </script>
+</body>
+</html>
