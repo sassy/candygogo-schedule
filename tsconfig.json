@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "lib": ["es6", "dom"],
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": false
+    },
+    "include": [
+      "src/*.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+}
