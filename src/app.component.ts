@@ -4,7 +4,7 @@ import {ScheduleService} from './schedule.service';
 
 @Component({
   selector: 'app-schedule',
-  templateUrl: 'app.component.html'
+  templateUrl: './src/app.component.html'
 })
 
 export class AppComponent implements OnInit {

@@ -45409,7 +45409,7 @@
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: 'app-schedule',
-	            templateUrl: 'app.component.html'
+	            templateUrl: './src/app.component.html'
 	        }), 
 	        __metadata('design:paramtypes', [schedule_service_1.ScheduleService])
 	    ], AppComponent);
