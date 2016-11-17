@@ -45399,7 +45399,6 @@
 	        var _this = this;
 	        this.scheduleService.getEvents()
 	            .subscribe(function (events) {
-	            console.log(events);
 	            events.forEach(function (item) {
 	                var date = new Date(item.start.dateTime);
 	                var ret = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + item.summary;
@@ -45410,7 +45409,7 @@
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: 'app-schedule',
-	            template: "\n  <ul>\n    <li *ngFor=\"let live of lives\">{{live}}</li>\n  </ul>\n  "
+	            templateUrl: 'app.component.html'
 	        }), 
 	        __metadata('design:paramtypes', [schedule_service_1.ScheduleService])
 	    ], AppComponent);
@@ -45449,17 +45448,20 @@
 	    }
 	    ScheduleService.prototype.getEvents = function () {
 	        return this.http.get(this.url)
-	            .map(this.formatDate)
+	            .map(function (res) {
+	            return res.json();
+	        }).map(function (json) {
+	            return json.items;
+	        }).map(this.sortData)
 	            .catch(this.handleError);
 	    };
-	    ScheduleService.prototype.formatDate = function (res) {
-	        var json = res.json();
-	        json.items.sort(function (a, b) {
+	    ScheduleService.prototype.sortData = function (items) {
+	        items.sort(function (a, b) {
 	            var dateA = new Date(a.start.dateTime);
 	            var dateB = new Date(b.start.dateTime);
 	            return dateA.getTime() < dateB.getTime() ? -1 : 1;
 	        });
-	        return json.items || {};
+	        return items;
 	    };
 	    ScheduleService.prototype.handleError = function (error) {
 	        console.log(error.message);

@@ -19,18 +19,21 @@ export class ScheduleService {
 
   getEvents(): Observable<any[]> {
     return this.http.get(this.url)
-                    .map(this.formatDate)
+                    .map((res: Response) => {
+                      return res.json();
+                    }).map((json) => {
+                      return json.items;
+                    }).map(this.sortData)
                     .catch(this.handleError);
   }
 
-  private formatDate(res: Response) {
-    let json = res.json();
-    json.items.sort((a:any, b:any) => {
+  private sortData(items: any) {
+    items.sort((a:any, b:any) => {
       const dateA = new Date(a.start.dateTime);
       const dateB = new Date(b.start.dateTime);
       return dateA.getTime() < dateB.getTime() ? -1 : 1;
     });
-    return json.items || {};
+    return items;
   }
 
   private handleError(error: Response | any) {
