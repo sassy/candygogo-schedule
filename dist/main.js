@@ -45401,7 +45401,7 @@
 	            .subscribe(function (events) {
 	            events.forEach(function (item) {
 	                var date = new Date(item.start.dateTime);
-	                var ret = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + item.summary;
+	                var ret = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + item.summary;
 	                _this.lives.push(ret);
 	            });
 	        });

@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
           .subscribe((events) => {
             events.forEach((item:any) => {
               const date = new Date(item.start.dateTime);
-              let ret = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + item.summary;
+              let ret = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + item.summary;
               this.lives.push(ret);
             });
           });
