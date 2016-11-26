@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 import {ScheduleService} from './schedule.service';
+import { LiveInfo } from './live.info';
 
 @Component({
   selector: 'app-schedule',
+  styleUrls: ['./src/app.component.css'],
   templateUrl: './src/app.component.html'
 })
 
 export class AppComponent implements OnInit {
-  lives: string[] = [];
+  lives: LiveInfo[] = [];
 
   constructor(private scheduleService: ScheduleService) {}
 
@@ -17,8 +19,10 @@ export class AppComponent implements OnInit {
           .subscribe((events) => {
             events.forEach((item:any) => {
               const date = new Date(item.start.dateTime);
-              let ret = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + item.summary;
-              this.lives.push(ret);
+              let info = new LiveInfo();
+              info.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+              info.summary = item.summary;
+              this.lives.push(info);
             });
           });
   }

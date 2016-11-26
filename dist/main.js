@@ -45390,6 +45390,7 @@
 	};
 	var core_1 = __webpack_require__(296);
 	var schedule_service_1 = __webpack_require__(319);
+	var live_info_1 = __webpack_require__(329);
 	var AppComponent = (function () {
 	    function AppComponent(scheduleService) {
 	        this.scheduleService = scheduleService;
@@ -45401,14 +45402,17 @@
 	            .subscribe(function (events) {
 	            events.forEach(function (item) {
 	                var date = new Date(item.start.dateTime);
-	                var ret = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + item.summary;
-	                _this.lives.push(ret);
+	                var info = new live_info_1.LiveInfo();
+	                info.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	                info.summary = item.summary;
+	                _this.lives.push(info);
 	            });
 	        });
 	    };
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: 'app-schedule',
+	            styleUrls: ['./src/app.component.css'],
 	            templateUrl: './src/app.component.html'
 	        }), 
 	        __metadata('design:paramtypes', [schedule_service_1.ScheduleService])
@@ -45861,6 +45865,19 @@
 	}(Subscriber_1.Subscriber));
 	exports.InnerSubscriber = InnerSubscriber;
 	//# sourceMappingURL=InnerSubscriber.js.map
+
+/***/ },
+/* 329 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var LiveInfo = (function () {
+	    function LiveInfo() {
+	    }
+	    return LiveInfo;
+	}());
+	exports.LiveInfo = LiveInfo;
+
 
 /***/ }
 /******/ ]);
