@@ -22,8 +22,11 @@ export class AppComponent implements OnInit {
               let info = new LiveInfo();
               info.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
               info.summary = item.summary;
+              info.description = item.description;
               this.lives.push(info);
             });
           });
   }
+
+
 }

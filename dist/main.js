@@ -45405,6 +45405,7 @@
 	                var info = new live_info_1.LiveInfo();
 	                info.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 	                info.summary = item.summary;
+	                info.description = item.description;
 	                _this.lives.push(info);
 	            });
 	        });
