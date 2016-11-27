@@ -4,6 +4,8 @@ import { HttpModule} from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ScheduleListComponent } from './schedule.list.component';
+import { ScheduleDetailComponent } from './schedule.detail.component';
+
 import { ScheduleService } from './schedule.service';
 
 @NgModule({
@@ -13,7 +15,8 @@ import { ScheduleService } from './schedule.service';
   ],
   declarations: [
     AppComponent,
-    ScheduleListComponent 
+    ScheduleListComponent,
+    ScheduleDetailComponent
   ],
   providers: [ScheduleService],
   bootstrap: [AppComponent]

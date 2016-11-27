@@ -43493,6 +43493,7 @@
 	var http_1 = __webpack_require__(317);
 	var app_component_1 = __webpack_require__(318);
 	var schedule_list_component_1 = __webpack_require__(319);
+	var schedule_detail_component_1 = __webpack_require__(331);
 	var schedule_service_1 = __webpack_require__(320);
 	var AppModule = (function () {
 	    function AppModule() {
@@ -43505,7 +43506,8 @@
 	            ],
 	            declarations: [
 	                app_component_1.AppComponent,
-	                schedule_list_component_1.ScheduleListComponent
+	                schedule_list_component_1.ScheduleListComponent,
+	                schedule_detail_component_1.ScheduleDetailComponent
 	            ],
 	            providers: [schedule_service_1.ScheduleService],
 	            bootstrap: [app_component_1.AppComponent]
@@ -45396,6 +45398,9 @@
 	var AppComponent = (function () {
 	    function AppComponent() {
 	    }
+	    AppComponent.prototype.setInfo = function (info) {
+	        this.selectedLiveInfo = info;
+	    };
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: 'app-schedule',
@@ -45430,6 +45435,7 @@
 	    function ScheduleListComponent(scheduleService) {
 	        this.scheduleService = scheduleService;
 	        this.lives = [];
+	        this.select = new core_1.EventEmitter();
 	    }
 	    ScheduleListComponent.prototype.ngOnInit = function () {
 	        var _this = this;
@@ -45446,8 +45452,12 @@
 	        });
 	    };
 	    ScheduleListComponent.prototype.getDescription = function (info) {
-	        console.log(info.description);
+	        this.select.emit(info);
 	    };
+	    __decorate([
+	        core_1.Output(), 
+	        __metadata('design:type', core_1.EventEmitter)
+	    ], ScheduleListComponent.prototype, "select", void 0);
 	    ScheduleListComponent = __decorate([
 	        core_1.Component({
 	            selector: 'schedule-list',
@@ -45916,6 +45926,42 @@
 	    return LiveInfo;
 	}());
 	exports.LiveInfo = LiveInfo;
+
+
+/***/ },
+/* 331 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(296);
+	var live_info_1 = __webpack_require__(330);
+	var ScheduleDetailComponent = (function () {
+	    function ScheduleDetailComponent() {
+	    }
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', live_info_1.LiveInfo)
+	    ], ScheduleDetailComponent.prototype, "selectedInfo", void 0);
+	    ScheduleDetailComponent = __decorate([
+	        core_1.Component({
+	            selector: 'schedule-detail',
+	            styleUrls: ['./src/schedule.detail.component.css'],
+	            templateUrl: './src/schedule.detail.component.html'
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], ScheduleDetailComponent);
+	    return ScheduleDetailComponent;
+	}());
+	exports.ScheduleDetailComponent = ScheduleDetailComponent;
 
 
 /***/ }

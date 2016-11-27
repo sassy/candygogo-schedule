@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import {ScheduleService} from './schedule.service';
 import { LiveInfo } from './live.info';
@@ -11,6 +11,7 @@ import { LiveInfo } from './live.info';
 
 export class ScheduleListComponent implements OnInit {
   lives: LiveInfo[] = [];
+  @Output() select: EventEmitter<LiveInfo> = new EventEmitter();
 
   constructor(private scheduleService: ScheduleService) {}
 
@@ -29,7 +30,7 @@ export class ScheduleListComponent implements OnInit {
   }
 
   getDescription(info: LiveInfo): void {
-    console.log(info.description);
+    this.select.emit(info);
   }
 
 }

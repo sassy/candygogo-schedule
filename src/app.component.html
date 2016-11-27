@@ -1,1 +1,2 @@
-<schedule-list></schedule-list>
+<schedule-list class="list" (select)="setInfo($event)"></schedule-list>
+<schedule-detail class="detail" [selectedInfo]="selectedLiveInfo"></schedule-detail>
