@@ -43492,7 +43492,8 @@
 	var platform_browser_1 = __webpack_require__(314);
 	var http_1 = __webpack_require__(317);
 	var app_component_1 = __webpack_require__(318);
-	var schedule_service_1 = __webpack_require__(319);
+	var schedule_list_component_1 = __webpack_require__(319);
+	var schedule_service_1 = __webpack_require__(320);
 	var AppModule = (function () {
 	    function AppModule() {
 	    }
@@ -43502,7 +43503,10 @@
 	                platform_browser_1.BrowserModule,
 	                http_1.HttpModule
 	            ],
-	            declarations: [app_component_1.AppComponent],
+	            declarations: [
+	                app_component_1.AppComponent,
+	                schedule_list_component_1.ScheduleListComponent
+	            ],
 	            providers: [schedule_service_1.ScheduleService],
 	            bootstrap: [app_component_1.AppComponent]
 	        }), 
@@ -45389,34 +45393,16 @@
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(296);
-	var schedule_service_1 = __webpack_require__(319);
-	var live_info_1 = __webpack_require__(329);
 	var AppComponent = (function () {
-	    function AppComponent(scheduleService) {
-	        this.scheduleService = scheduleService;
-	        this.lives = [];
+	    function AppComponent() {
 	    }
-	    AppComponent.prototype.ngOnInit = function () {
-	        var _this = this;
-	        this.scheduleService.getEvents()
-	            .subscribe(function (events) {
-	            events.forEach(function (item) {
-	                var date = new Date(item.start.dateTime);
-	                var info = new live_info_1.LiveInfo();
-	                info.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-	                info.summary = item.summary;
-	                info.description = item.description;
-	                _this.lives.push(info);
-	            });
-	        });
-	    };
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: 'app-schedule',
 	            styleUrls: ['./src/app.component.css'],
 	            templateUrl: './src/app.component.html'
 	        }), 
-	        __metadata('design:paramtypes', [schedule_service_1.ScheduleService])
+	        __metadata('design:paramtypes', [])
 	    ], AppComponent);
 	    return AppComponent;
 	}());
@@ -45438,10 +45424,62 @@
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(296);
+	var schedule_service_1 = __webpack_require__(320);
+	var live_info_1 = __webpack_require__(330);
+	var ScheduleListComponent = (function () {
+	    function ScheduleListComponent(scheduleService) {
+	        this.scheduleService = scheduleService;
+	        this.lives = [];
+	    }
+	    ScheduleListComponent.prototype.ngOnInit = function () {
+	        var _this = this;
+	        this.scheduleService.getEvents()
+	            .subscribe(function (events) {
+	            events.forEach(function (item) {
+	                var date = new Date(item.start.dateTime);
+	                var info = new live_info_1.LiveInfo();
+	                info.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	                info.summary = item.summary;
+	                info.description = item.description;
+	                _this.lives.push(info);
+	            });
+	        });
+	    };
+	    ScheduleListComponent.prototype.getDescription = function (info) {
+	        console.log(info.description);
+	    };
+	    ScheduleListComponent = __decorate([
+	        core_1.Component({
+	            selector: 'schedule-list',
+	            styleUrls: ['./src/schedule.list.component.css'],
+	            templateUrl: './src/schedule.list.component.html'
+	        }), 
+	        __metadata('design:paramtypes', [schedule_service_1.ScheduleService])
+	    ], ScheduleListComponent);
+	    return ScheduleListComponent;
+	}());
+	exports.ScheduleListComponent = ScheduleListComponent;
+
+
+/***/ },
+/* 320 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(296);
 	var http_1 = __webpack_require__(317);
 	var Observable_1 = __webpack_require__(298);
-	__webpack_require__(320);
-	__webpack_require__(322);
+	__webpack_require__(321);
+	__webpack_require__(323);
 	var ScheduleService = (function () {
 	    function ScheduleService(http) {
 	        this.http = http;
@@ -45482,17 +45520,17 @@
 
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(298);
-	var map_1 = __webpack_require__(321);
+	var map_1 = __webpack_require__(322);
 	Observable_1.Observable.prototype.map = map_1.map;
 	//# sourceMappingURL=map.js.map
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45584,18 +45622,18 @@
 	//# sourceMappingURL=map.js.map
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(298);
-	var catch_1 = __webpack_require__(323);
+	var catch_1 = __webpack_require__(324);
 	Observable_1.Observable.prototype.catch = catch_1._catch;
 	Observable_1.Observable.prototype._catch = catch_1._catch;
 	//# sourceMappingURL=catch.js.map
 
 /***/ },
-/* 323 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45604,8 +45642,8 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var OuterSubscriber_1 = __webpack_require__(324);
-	var subscribeToResult_1 = __webpack_require__(325);
+	var OuterSubscriber_1 = __webpack_require__(325);
+	var subscribeToResult_1 = __webpack_require__(326);
 	/**
 	 * Catches errors on the observable to be handled by returning a new observable or throwing an error.
 	 * @param {function} selector a function that takes as arguments `err`, which is the error, and `caught`, which
@@ -45665,7 +45703,7 @@
 	//# sourceMappingURL=catch.js.map
 
 /***/ },
-/* 324 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45700,16 +45738,16 @@
 	//# sourceMappingURL=OuterSubscriber.js.map
 
 /***/ },
-/* 325 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var root_1 = __webpack_require__(299);
 	var isArray_1 = __webpack_require__(304);
-	var isPromise_1 = __webpack_require__(326);
+	var isPromise_1 = __webpack_require__(327);
 	var Observable_1 = __webpack_require__(298);
-	var iterator_1 = __webpack_require__(327);
-	var InnerSubscriber_1 = __webpack_require__(328);
+	var iterator_1 = __webpack_require__(328);
+	var InnerSubscriber_1 = __webpack_require__(329);
 	var observable_1 = __webpack_require__(311);
 	function subscribeToResult(outerSubscriber, result, outerValue, outerIndex) {
 	    var destination = new InnerSubscriber_1.InnerSubscriber(outerSubscriber, outerValue, outerIndex);
@@ -45779,7 +45817,7 @@
 	//# sourceMappingURL=subscribeToResult.js.map
 
 /***/ },
-/* 326 */
+/* 327 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -45790,7 +45828,7 @@
 	//# sourceMappingURL=isPromise.js.map
 
 /***/ },
-/* 327 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45827,7 +45865,7 @@
 	//# sourceMappingURL=iterator.js.map
 
 /***/ },
-/* 328 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45868,7 +45906,7 @@
 	//# sourceMappingURL=InnerSubscriber.js.map
 
 /***/ },
-/* 329 */
+/* 330 */
 /***/ function(module, exports) {
 
 	"use strict";

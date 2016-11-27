@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule} from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { ScheduleListComponent } from './schedule.list.component';
 import { ScheduleService } from './schedule.service';
 
 @NgModule({
@@ -10,7 +11,10 @@ import { ScheduleService } from './schedule.service';
     BrowserModule,
     HttpModule
   ],
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    ScheduleListComponent 
+  ],
   providers: [ScheduleService],
   bootstrap: [AppComponent]
 })
