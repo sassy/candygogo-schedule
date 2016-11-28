@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
+import { LiveInfo } from './live.info';
+
 import { Observable }     from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
@@ -17,23 +19,37 @@ export class ScheduleService {
     this.url += today.toISOString();
   }
 
-  getEvents(): Observable<any[]> {
+  getEvents(): Observable<LiveInfo[]> {
     return this.http.get(this.url)
                     .map((res: Response) => {
                       return res.json();
                     }).map((json) => {
                       return json.items;
                     }).map(this.sortData)
+                    .map(this.convertLiveInfo)
                     .catch(this.handleError);
   }
 
-  private sortData(items: any) {
+  private sortData(items: Object[]) {
     items.sort((a:any, b:any) => {
       const dateA = new Date(a.start.dateTime);
       const dateB = new Date(b.start.dateTime);
       return dateA.getTime() < dateB.getTime() ? -1 : 1;
     });
     return items;
+  }
+
+
+  private convertLiveInfo(items: Object[]) : LiveInfo[] {
+    const lives: LiveInfo[] = [];
+    items.forEach((item:any) => {
+      lives.push(new LiveInfo(
+        new Date(item.start.dateTime),
+        item.summary,
+        item.description
+      ));
+    });
+    return lives;
   }
 
   private handleError(error: Response | any) {

@@ -18,14 +18,7 @@ export class ScheduleListComponent implements OnInit {
   ngOnInit(): void {
     this.scheduleService.getEvents()
           .subscribe((events) => {
-            events.forEach((item:any) => {
-              const date = new Date(item.start.dateTime);
-              let info = new LiveInfo();
-              info.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-              info.summary = item.summary;
-              info.description = item.description;
-              this.lives.push(info);
-            });
+            this.lives = events;
           });
   }
 

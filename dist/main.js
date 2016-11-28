@@ -45430,7 +45430,6 @@
 	};
 	var core_1 = __webpack_require__(296);
 	var schedule_service_1 = __webpack_require__(320);
-	var live_info_1 = __webpack_require__(330);
 	var ScheduleListComponent = (function () {
 	    function ScheduleListComponent(scheduleService) {
 	        this.scheduleService = scheduleService;
@@ -45441,14 +45440,7 @@
 	        var _this = this;
 	        this.scheduleService.getEvents()
 	            .subscribe(function (events) {
-	            events.forEach(function (item) {
-	                var date = new Date(item.start.dateTime);
-	                var info = new live_info_1.LiveInfo();
-	                info.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-	                info.summary = item.summary;
-	                info.description = item.description;
-	                _this.lives.push(info);
-	            });
+	            _this.lives = events;
 	        });
 	    };
 	    ScheduleListComponent.prototype.getDescription = function (info) {
@@ -45487,9 +45479,10 @@
 	};
 	var core_1 = __webpack_require__(296);
 	var http_1 = __webpack_require__(317);
+	var live_info_1 = __webpack_require__(321);
 	var Observable_1 = __webpack_require__(298);
-	__webpack_require__(321);
-	__webpack_require__(323);
+	__webpack_require__(322);
+	__webpack_require__(324);
 	var ScheduleService = (function () {
 	    function ScheduleService(http) {
 	        this.http = http;
@@ -45506,6 +45499,7 @@
 	        }).map(function (json) {
 	            return json.items;
 	        }).map(this.sortData)
+	            .map(this.convertLiveInfo)
 	            .catch(this.handleError);
 	    };
 	    ScheduleService.prototype.sortData = function (items) {
@@ -45515,6 +45509,13 @@
 	            return dateA.getTime() < dateB.getTime() ? -1 : 1;
 	        });
 	        return items;
+	    };
+	    ScheduleService.prototype.convertLiveInfo = function (items) {
+	        var lives = [];
+	        items.forEach(function (item) {
+	            lives.push(new live_info_1.LiveInfo(new Date(item.start.dateTime), item.summary, item.description));
+	        });
+	        return lives;
 	    };
 	    ScheduleService.prototype.handleError = function (error) {
 	        console.log(error.message);
@@ -45531,16 +45532,32 @@
 
 /***/ },
 /* 321 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var LiveInfo = (function () {
+	    function LiveInfo(date, summary, description) {
+	        this.summary = summary;
+	        this.description = description;
+	        this.date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	    }
+	    return LiveInfo;
+	}());
+	exports.LiveInfo = LiveInfo;
+
+
+/***/ },
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(298);
-	var map_1 = __webpack_require__(322);
+	var map_1 = __webpack_require__(323);
 	Observable_1.Observable.prototype.map = map_1.map;
 	//# sourceMappingURL=map.js.map
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45632,18 +45649,18 @@
 	//# sourceMappingURL=map.js.map
 
 /***/ },
-/* 323 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Observable_1 = __webpack_require__(298);
-	var catch_1 = __webpack_require__(324);
+	var catch_1 = __webpack_require__(325);
 	Observable_1.Observable.prototype.catch = catch_1._catch;
 	Observable_1.Observable.prototype._catch = catch_1._catch;
 	//# sourceMappingURL=catch.js.map
 
 /***/ },
-/* 324 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45652,8 +45669,8 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var OuterSubscriber_1 = __webpack_require__(325);
-	var subscribeToResult_1 = __webpack_require__(326);
+	var OuterSubscriber_1 = __webpack_require__(326);
+	var subscribeToResult_1 = __webpack_require__(327);
 	/**
 	 * Catches errors on the observable to be handled by returning a new observable or throwing an error.
 	 * @param {function} selector a function that takes as arguments `err`, which is the error, and `caught`, which
@@ -45713,7 +45730,7 @@
 	//# sourceMappingURL=catch.js.map
 
 /***/ },
-/* 325 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45748,16 +45765,16 @@
 	//# sourceMappingURL=OuterSubscriber.js.map
 
 /***/ },
-/* 326 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var root_1 = __webpack_require__(299);
 	var isArray_1 = __webpack_require__(304);
-	var isPromise_1 = __webpack_require__(327);
+	var isPromise_1 = __webpack_require__(328);
 	var Observable_1 = __webpack_require__(298);
-	var iterator_1 = __webpack_require__(328);
-	var InnerSubscriber_1 = __webpack_require__(329);
+	var iterator_1 = __webpack_require__(329);
+	var InnerSubscriber_1 = __webpack_require__(330);
 	var observable_1 = __webpack_require__(311);
 	function subscribeToResult(outerSubscriber, result, outerValue, outerIndex) {
 	    var destination = new InnerSubscriber_1.InnerSubscriber(outerSubscriber, outerValue, outerIndex);
@@ -45827,7 +45844,7 @@
 	//# sourceMappingURL=subscribeToResult.js.map
 
 /***/ },
-/* 327 */
+/* 328 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -45838,7 +45855,7 @@
 	//# sourceMappingURL=isPromise.js.map
 
 /***/ },
-/* 328 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45875,7 +45892,7 @@
 	//# sourceMappingURL=iterator.js.map
 
 /***/ },
-/* 329 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45916,19 +45933,6 @@
 	//# sourceMappingURL=InnerSubscriber.js.map
 
 /***/ },
-/* 330 */
-/***/ function(module, exports) {
-
-	"use strict";
-	var LiveInfo = (function () {
-	    function LiveInfo() {
-	    }
-	    return LiveInfo;
-	}());
-	exports.LiveInfo = LiveInfo;
-
-
-/***/ },
 /* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -45943,7 +45947,7 @@
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(296);
-	var live_info_1 = __webpack_require__(330);
+	var live_info_1 = __webpack_require__(321);
 	var ScheduleDetailComponent = (function () {
 	    function ScheduleDetailComponent() {
 	    }
