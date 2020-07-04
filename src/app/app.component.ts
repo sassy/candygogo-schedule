@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
+
+import { LiveInfo } from './live-info';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  templateUrl: './app.component.html'
 })
+
 export class AppComponent {
-  title = 'candygogo-schedule2';
+  selectedLiveInfo: LiveInfo;
+  title = 'candygogo-schedule';
+
+  setInfo(info:LiveInfo): void {
+    this.selectedLiveInfo = info;
+  }
 }

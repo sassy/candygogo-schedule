@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('candygogo-schedule2 app is running!');
+    expect(page.getTitleText()).toEqual('candygogo-schedule app is running!');
   });
 
   afterEach(async () => {

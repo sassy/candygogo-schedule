@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "candygogo-schedule2": {
+    "candygogo-schedule": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/candygogo-schedule2",
+            "outputPath": "docs",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "candygogo-schedule2:build"
+            "browserTarget": "candygogo-schedule:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "candygogo-schedule2:build:production"
+              "browserTarget": "candygogo-schedule:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "candygogo-schedule2:build"
+            "browserTarget": "candygogo-schedule:build"
           }
         },
         "test": {
@@ -114,15 +114,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "candygogo-schedule2:serve"
+            "devServerTarget": "candygogo-schedule:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "candygogo-schedule2:serve:production"
+              "devServerTarget": "candygogo-schedule:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "candygogo-schedule2"
+  "defaultProject": "candygogo-schedule"
 }

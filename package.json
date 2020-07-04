@@ -1,6 +1,7 @@
 {
-  "name": "candygogo-schedule2",
-  "version": "0.0.0",
+  "name": "candygogo-schedule",
+  "version": "2.0.0",
+  "description": "",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +10,16 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sassy/candygogo-schedule.git"
+  },
+  "author": "Satoshi Watanabe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sassy/candygogo-schedule/issues"
+  },
+  "homepage": "https://github.com/sassy/candygogo-schedule#readme",
   "dependencies": {
     "@angular/animations": "~10.0.2",
     "@angular/common": "~10.0.2",
