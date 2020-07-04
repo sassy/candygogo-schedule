@@ -19,12 +19,12 @@
   },
   "homepage": "https://github.com/sassy/candygogo-schedule#readme",
   "dependencies": {
-    "@angular/common": "2.4.10",
-    "@angular/compiler": "2.4.10",
-    "@angular/core": "2.4.10",
-    "@angular/http": "2.4.10",
-    "@angular/platform-browser": "2.4.10",
-    "@angular/platform-browser-dynamic": "2.4.10",
+    "@angular/common": "10.0.2",
+    "@angular/compiler": "10.0.2",
+    "@angular/core": "10.0.2",
+    "@angular/http": "7.2.16",
+    "@angular/platform-browser": "10.0.2",
+    "@angular/platform-browser-dynamic": "10.0.2",
     "core-js": "2.6.11",
     "rxjs": "5.5.12",
     "zone.js": "0.10.3"
